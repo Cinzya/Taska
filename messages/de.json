@@ -1,0 +1,23 @@
+{
+  "HomePage": {
+    "title": "Hallo Welt!"
+  },
+  "Tasks": {
+    "title": "Aufgaben",
+    "searchPlaceholder": "Aufgaben suchen...",
+    "searchAriaLabel": "Aufgaben suchen",
+    "clearSearchAriaLabel": "Suche löschen",
+    "filterAriaLabel": "Aufgaben filtern",
+    "addTaskAriaLabel": "Aufgabe hinzufügen",
+    "editTaskAriaLabel": "Aufgabe bearbeiten",
+    "deleteTaskAriaLabel": "Aufgabe löschen",
+    "showCompleted": "Erledigte anzeigen",
+    "showNotCompleted": "Nicht erledigte anzeigen",
+    "showDueTasks": "Fällige Aufgaben anzeigen",
+    "clearFilter": "Filter löschen",
+    "noTasksFound": "Keine Aufgaben entsprechen deinen Kriterien.",
+    "noTasksYet": "Noch keine Aufgaben. Füge eines hinzu über das + Symbol.",
+    "taskCompleted": "Aufgabe erledigt",
+    "taskNotCompleted": "Aufgabe nicht erledigt"
+  }
+}

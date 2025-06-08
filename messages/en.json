@@ -1,0 +1,20 @@
+{
+  "Tasks": {
+    "title": "Tasks",
+    "searchPlaceholder": "Search tasks...",
+    "searchAriaLabel": "Search tasks",
+    "clearSearchAriaLabel": "Clear search",
+    "filterAriaLabel": "Filter tasks",
+    "addTaskAriaLabel": "Add task",
+    "editTaskAriaLabel": "Edit task",
+    "deleteTaskAriaLabel": "Delete task",
+    "showCompleted": "Show completed",
+    "showNotCompleted": "Show not completed",
+    "showDueTasks": "Show due tasks",
+    "clearFilter": "Clear filter",
+    "noTasksFound": "No tasks match your criteria.",
+    "noTasksYet": "No tasks yet. Click + to add one.",
+    "taskCompleted": "Task completed",
+    "taskNotCompleted": "Task not completed"
+  }
+}
