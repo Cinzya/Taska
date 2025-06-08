@@ -65,5 +65,12 @@
     "defaultName": "Mensch",
     "welcomeBack": "Willkommen zurück, {name}",
     "hello": "Hallo, {name}"
+  },
+  "UserNameModal": {
+    "title": "Namen bearbeiten",
+    "nameLabel": "Name",
+    "namePlaceholder": "Namen eingeben",
+    "cancelButton": "Abbrechen",
+    "updateNameButton": "Namen aktualisieren"
   }
 }

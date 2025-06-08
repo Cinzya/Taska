@@ -65,5 +65,12 @@
     "defaultName": "Human",
     "welcomeBack": "Welcome back, {name}",
     "hello": "Hello, {name}"
+  },
+  "UserNameModal": {
+    "title": "Edit Your Name",
+    "nameLabel": "Name",
+    "namePlaceholder": "Enter your name",
+    "cancelButton": "Cancel",
+    "updateNameButton": "Update Name"
   }
 }
