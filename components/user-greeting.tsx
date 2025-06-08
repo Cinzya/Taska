@@ -1,6 +1,7 @@
 "use client"
 
 import { useState } from "react"
+import { useTranslations } from "next-intl"
 
 interface UserGreetingProps {
   userName: string
@@ -9,10 +10,13 @@ interface UserGreetingProps {
 }
 
 export default function UserGreeting({ userName, isReturningUser, onEditClick }: UserGreetingProps) {
+  const t = useTranslations('UserGreeting')
   const [isHovered, setIsHovered] = useState(false)
 
-  const displayName = userName || "Human"
-  const greeting = isReturningUser ? `Welcome back, ${displayName}` : `Hello, ${displayName}`
+  const displayName = userName || t('defaultName')
+  const greeting = isReturningUser 
+    ? t('welcomeBack', { name: displayName })
+    : t('hello', { name: displayName })
 
   return (
     <div className="text-center">

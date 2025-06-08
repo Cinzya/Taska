@@ -60,5 +60,10 @@
     "addTimezoneAriaLabel": "Add timezone",
     "cancelButton": "Cancel",
     "saveChangesButton": "Save Changes"
+  },
+  "UserGreeting": {
+    "defaultName": "Human",
+    "welcomeBack": "Welcome back, {name}",
+    "hello": "Hello, {name}"
   }
 }

@@ -60,5 +60,10 @@
     "addTimezoneAriaLabel": "Zeitzone hinzufügen",
     "cancelButton": "Abbrechen",
     "saveChangesButton": "Änderungen speichern"
+  },
+  "UserGreeting": {
+    "defaultName": "Mensch",
+    "welcomeBack": "Willkommen zurück, {name}",
+    "hello": "Hallo, {name}"
   }
 }
