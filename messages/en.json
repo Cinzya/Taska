@@ -23,5 +23,13 @@
     "warningText": "This action cannot be undone.",
     "cancelButton": "Cancel",
     "deleteButton": "Delete"
+  },
+  "InfoSection": {
+    "timeLabel": "Time",
+    "dayLabel": "Day",
+    "dateLabel": "Date",
+    "timezoneLabel": "Timezone",
+    "manageTimezonesAriaLabel": "Manage timezones",
+    "toggleThemeAriaLabel": "Toggle theme"
   }
 }

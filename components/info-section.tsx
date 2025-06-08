@@ -4,6 +4,7 @@ import { useState, useEffect } from "react"
 import { Moon, Sun, Clock } from "lucide-react"
 import { useTheme } from "./theme-provider"
 import TimezoneModal from "./timezone-modal"
+import { useTranslations } from "next-intl"
 
 interface TimezoneInfo {
   id: string
@@ -12,6 +13,7 @@ interface TimezoneInfo {
 }
 
 export default function InfoSection() {
+  const t = useTranslations('InfoSection')
   const [currentTime, setCurrentTime] = useState(new Date())
   const [timezones, setTimezones] = useState<TimezoneInfo[]>([
     {
@@ -74,19 +76,19 @@ export default function InfoSection() {
     <>
       <div className="bg-white dark:bg-[#141415] rounded-lg shadow-sm border border-gray-200 dark:border-[#2D2D2D] overflow-hidden">
         <div className="px-5 py-1 flex justify-between items-center bg-[#F5F5F5] dark:bg-[#1C1C1C]">
-          <h2 className="text-base font-sm text-gray-400 dark:text-[#989797]">Time</h2>
+          <h2 className="text-base font-sm text-gray-400 dark:text-[#989797]">{t('timeLabel')}</h2>
           <div className="flex items-center space-x-2">
             <button
               onClick={() => setIsTimezoneModalOpen(true)}
               className="px-1 py-2 text-gray-400 hover:text-gray-600 dark:text-[#989797] dark:hover:text-[#989797] rounded-lg hover:bg-gray-100 dark:hover:bg-[#2D2D2D]"
-              aria-label="Manage timezones"
+              aria-label={t('manageTimezonesAriaLabel')}
             >
               <Clock size={18} />
             </button>
             <button
               onClick={toggleTheme}
               className="px-1 py-2 text-gray-400 hover:text-gray-600 dark:text-[#989797] dark:hover:text-[#989797] rounded-lg hover:bg-gray-100 dark:hover:bg-[#2D2D2D]"
-              aria-label="Toggle theme"
+              aria-label={t('toggleThemeAriaLabel')}
             >
               {theme === "light" ? <Moon size={18} /> : <Sun size={18} />}
             </button>
@@ -97,25 +99,25 @@ export default function InfoSection() {
           {timezones.slice(0, 5).map((tz, index) => (
             <div key={tz.id} className={`flex ${index > 0 ? "border-t border-gray-100 dark:border-[#2D2D2D]" : ""}`}>
               <div className="flex-1 px-5 py-4 text-center border-r border-gray-100 dark:border-[#2D2D2D]">
-                <div className="text-sm text-gray-400 dark:text-[#989797]">Time</div>
+                <div className="text-sm text-gray-400 dark:text-[#989797]">{t('timeLabel')}</div>
                 <div className="text-sm font-medium text-cyan-600 dark:text-[#DEE2E2]">
                   {formatTime(currentTime, tz.timezone)}
                 </div>
               </div>
               <div className="flex-1 px-5 py-4 text-center border-r border-gray-100 dark:border-[#2D2D2D]">
-                <div className="text-sm text-gray-400 dark:text-[#989797]">Day</div>
+                <div className="text-sm text-gray-400 dark:text-[#989797]">{t('dayLabel')}</div>
                 <div className="text-sm font-medium text-cyan-600 dark:text-[#DEE2E2]">
                   {formatDay(currentTime, tz.timezone)}
                 </div>
               </div>
               <div className="flex-1 px-5 py-4 text-center border-r border-gray-100 dark:border-[#2D2D2D]">
-                <div className="text-sm text-gray-400 dark:text-[#989797]">Date</div>
+                <div className="text-sm text-gray-400 dark:text-[#989797]">{t('dateLabel')}</div>
                 <div className="text-sm font-medium text-cyan-600 dark:text-[#DEE2E2]">
                   {formatDateOnly(currentTime, tz.timezone)}
                 </div>
               </div>
               <div className="flex-1 px-5 py-4 text-center">
-                <div className="text-sm text-gray-400 dark:text-[#989797]">Timezone</div>
+                <div className="text-sm text-gray-400 dark:text-[#989797]">{t('timezoneLabel')}</div>
                 <div className="text-sm font-medium text-cyan-600 dark:text-[#DEE2E2]">{tz.label}</div>
               </div>
             </div>
@@ -126,25 +128,25 @@ export default function InfoSection() {
               {timezones.slice(5).map((tz, index) => (
                 <div key={tz.id} className="flex border-t border-gray-100 dark:border-[#2D2D2D]">
                   <div className="flex-1 px-5 py-4 text-center border-r border-gray-100 dark:border-[#2D2D2D]">
-                    <div className="text-sm text-gray-400 dark:text-[#989797]">Time</div>
+                    <div className="text-sm text-gray-400 dark:text-[#989797]">{t('timeLabel')}</div>
                     <div className="text-sm font-medium text-cyan-600 dark:text-[#DEE2E2]">
                       {formatTime(currentTime, tz.timezone)}
                     </div>
                   </div>
                   <div className="flex-1 px-5 py-4 text-center border-r border-gray-100 dark:border-[#2D2D2D]">
-                    <div className="text-sm text-gray-400 dark:text-[#989797]">Day</div>
+                    <div className="text-sm text-gray-400 dark:text-[#989797]">{t('dayLabel')}</div>
                     <div className="text-sm font-medium text-cyan-600 dark:text-[#DEE2E2]">
                       {formatDay(currentTime, tz.timezone)}
                     </div>
                   </div>
                   <div className="flex-1 px-5 py-4 text-center border-r border-gray-100 dark:border-[#2D2D2D]">
-                    <div className="text-sm text-gray-400 dark:text-[#989797]">Date</div>
+                    <div className="text-sm text-gray-400 dark:text-[#989797]">{t('dateLabel')}</div>
                     <div className="text-sm font-medium text-cyan-600 dark:text-[#DEE2E2]">
                       {formatDateOnly(currentTime, tz.timezone)}
                     </div>
                   </div>
                   <div className="flex-1 px-5 py-4 text-center">
-                    <div className="text-sm text-gray-400 dark:text-[#989797]">Timezone</div>
+                    <div className="text-sm text-gray-400 dark:text-[#989797]">{t('timezoneLabel')}</div>
                     <div className="text-sm font-medium text-cyan-600 dark:text-[#DEE2E2]">{tz.label}</div>
                   </div>
                 </div>

@@ -23,5 +23,13 @@
     "warningText": "Diese Aktion kann nicht rückgängig gemacht werden.",
     "cancelButton": "Abbrechen",
     "deleteButton": "Löschen"
+  },
+  "InfoSection": {
+    "timeLabel": "Zeit",
+    "dayLabel": "Tag",
+    "dateLabel": "Datum",
+    "timezoneLabel": "Zeitzone",
+    "manageTimezonesAriaLabel": "Zeitzonen verwalten",
+    "toggleThemeAriaLabel": "Thema umschalten"
   }
 }
