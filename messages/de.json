@@ -13,7 +13,7 @@
     "showDueTasks": "Fällige Aufgaben anzeigen",
     "clearFilter": "Filter löschen",
     "noTasksFound": "Keine Aufgaben entsprechen deinen Kriterien.",
-    "noTasksYet": "Noch keine Aufgaben. Füge eines hinzu über das + Symbol.",
+    "noTasksYet": "Noch keine Aufgaben. Klicke auf das +",
     "taskCompleted": "Aufgabe erledigt",
     "taskNotCompleted": "Aufgabe nicht erledigt"
   },
@@ -31,5 +31,15 @@
     "timezoneLabel": "Zeitzone",
     "manageTimezonesAriaLabel": "Zeitzonen verwalten",
     "toggleThemeAriaLabel": "Thema umschalten"
+  },
+  "TaskModal": {
+    "editTaskTitle": "Aufgabe bearbeiten",
+    "addTaskTitle": "Neue Aufgabe hinzufügen",
+    "taskTitleLabel": "Titel",
+    "taskTitlePlaceholder": "Aufgabentitel eingeben",
+    "deadlineLabel": "Fälligkeitsdatum",
+    "cancelButton": "Abbrechen",
+    "updateTaskButton": "Aufgabe aktualisieren",
+    "addTaskButton": "Aufgabe hinzufügen"
   }
 }

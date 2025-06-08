@@ -31,5 +31,15 @@
     "timezoneLabel": "Timezone",
     "manageTimezonesAriaLabel": "Manage timezones",
     "toggleThemeAriaLabel": "Toggle theme"
+  },
+  "TaskModal": {
+    "editTaskTitle": "Edit Task",
+    "addTaskTitle": "Add New Task",
+    "taskTitleLabel": "Task Title",
+    "taskTitlePlaceholder": "Enter task title",
+    "deadlineLabel": "Deadline",
+    "cancelButton": "Cancel",
+    "updateTaskButton": "Update Task",
+    "addTaskButton": "Add Task"
   }
 }
