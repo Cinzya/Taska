@@ -41,5 +41,12 @@
     "cancelButton": "Cancel",
     "updateTaskButton": "Update Task",
     "addTaskButton": "Add Task"
+  },
+  "TaskStats": {
+    "title": "Statistics",
+    "overdue": "Overdue",
+    "notCompleted": "Not Completed",
+    "completed": "Completed",
+    "totalTasks": "Total Tasks"
   }
 }
