@@ -16,5 +16,12 @@
     "noTasksYet": "No tasks yet. Click + to add one.",
     "taskCompleted": "Task completed",
     "taskNotCompleted": "Task not completed"
+  },
+  "DeleteModal": {
+    "title": "Delete Task",
+    "confirmMessage": "Are you sure you want to delete the task",
+    "warningText": "This action cannot be undone.",
+    "cancelButton": "Cancel",
+    "deleteButton": "Delete"
   }
 }

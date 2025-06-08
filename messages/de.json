@@ -1,7 +1,4 @@
 {
-  "HomePage": {
-    "title": "Hallo Welt!"
-  },
   "Tasks": {
     "title": "Aufgaben",
     "searchPlaceholder": "Aufgaben suchen...",
@@ -19,5 +16,12 @@
     "noTasksYet": "Noch keine Aufgaben. Füge eines hinzu über das + Symbol.",
     "taskCompleted": "Aufgabe erledigt",
     "taskNotCompleted": "Aufgabe nicht erledigt"
+  },
+  "DeleteModal": {
+    "title": "Aufgabe löschen",
+    "confirmMessage": "Bist du sicher, dass du die Aufgabe löschen möchtest",
+    "warningText": "Diese Aktion kann nicht rückgängig gemacht werden.",
+    "cancelButton": "Abbrechen",
+    "deleteButton": "Löschen"
   }
 }
