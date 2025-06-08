@@ -1,73 +1,79 @@
-"use client"
+"use client";
 
-import { useState, useEffect } from "react"
-import { Plus, Search, Filter, X } from "lucide-react"
-import TaskModal from "@/components/task-modal"
-import TaskStats from "@/components/task-stats"
-import InfoSection from "@/components/info-section"
-import UserGreeting from "@/components/user-greeting"
-import DeleteConfirmModal from "@/components/delete-confirm-modal"
-import UserNameModal from "@/components/user-name-modal"
-import { ThemeProvider } from "@/components/theme-provider"
-import type { Task } from "@/lib/types"
-import { formatRelativeTime, isOverdue } from "@/lib/utils"
+import { useState, useEffect } from "react";
+import { Plus, Search, Filter, X } from "lucide-react";
+import TaskModal from "@/components/task-modal";
+import TaskStats from "@/components/task-stats";
+import InfoSection from "@/components/info-section";
+import UserGreeting from "@/components/user-greeting";
+import DeleteConfirmModal from "@/components/delete-confirm-modal";
+import UserNameModal from "@/components/user-name-modal";
+import { ThemeProvider } from "@/components/theme-provider";
+import type { Task } from "@/lib/types";
+import { formatRelativeTime, isOverdue } from "@/lib/utils";
+import { useTranslations } from "next-intl";
 
 export default function Home() {
-  const [tasks, setTasks] = useState<Task[]>([])
-  const [isModalOpen, setIsModalOpen] = useState(false)
-  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false)
-  const [isUserNameModalOpen, setIsUserNameModalOpen] = useState(false)
-  const [editingTask, setEditingTask] = useState<Task | null>(null)
-  const [taskToDelete, setTaskToDelete] = useState<string | null>(null)
-  const [hoveredTask, setHoveredTask] = useState<string | null>(null)
-  const [userName, setUserName] = useState<string>("")
+  const t = useTranslations('Tasks');
+  const [tasks, setTasks] = useState<Task[]>([]);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const [isUserNameModalOpen, setIsUserNameModalOpen] = useState(false);
+  const [editingTask, setEditingTask] = useState<Task | null>(null);
+  const [taskToDelete, setTaskToDelete] = useState<string | null>(null);
+  const [hoveredTask, setHoveredTask] = useState<string | null>(null);
+  const [userName, setUserName] = useState<string>("");
 
   // Search and filter states
-  const [isSearchExpanded, setIsSearchExpanded] = useState(false)
-  const [searchQuery, setSearchQuery] = useState("")
-  const [filterType, setFilterType] = useState<"all" | "completed" | "not-completed" | "due">("all")
-  const [isFilterDropdownOpen, setIsFilterDropdownOpen] = useState(false)
+  const [isSearchExpanded, setIsSearchExpanded] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [filterType, setFilterType] = useState<
+    "all" | "completed" | "not-completed" | "due"
+  >("all");
+  const [isFilterDropdownOpen, setIsFilterDropdownOpen] = useState(false);
 
   // Load data from localStorage on component mount
   useEffect(() => {
-    const storedTasks = localStorage.getItem("tasks")
+    const storedTasks = localStorage.getItem("tasks");
     if (storedTasks) {
-      setTasks(JSON.parse(storedTasks))
+      setTasks(JSON.parse(storedTasks));
     }
 
-    const storedUserName = localStorage.getItem("userName")
+    const storedUserName = localStorage.getItem("userName");
     if (storedUserName) {
-      setUserName(storedUserName)
+      setUserName(storedUserName);
     }
-  }, [])
+  }, []);
 
   // Save tasks to localStorage whenever they change
   useEffect(() => {
-    localStorage.setItem("tasks", JSON.stringify(tasks))
-  }, [tasks])
+    localStorage.setItem("tasks", JSON.stringify(tasks));
+  }, [tasks]);
 
   // Save userName to localStorage whenever it changes
   useEffect(() => {
     if (userName) {
-      localStorage.setItem("userName", userName)
+      localStorage.setItem("userName", userName);
     }
-  }, [userName])
+  }, [userName]);
 
   const addTask = (task: Task) => {
-    setTasks((prevTasks) => [...prevTasks, task])
-    setIsModalOpen(false)
-  }
+    setTasks((prevTasks) => [...prevTasks, task]);
+    setIsModalOpen(false);
+  };
 
   const updateTask = (updatedTask: Task) => {
-    setTasks((prevTasks) => prevTasks.map((task) => (task.id === updatedTask.id ? updatedTask : task)))
-    setEditingTask(null)
-  }
+    setTasks((prevTasks) =>
+      prevTasks.map((task) => (task.id === updatedTask.id ? updatedTask : task))
+    );
+    setEditingTask(null);
+  };
 
   const deleteTask = (id: string) => {
-    setTasks((prevTasks) => prevTasks.filter((task) => task.id !== id))
-    setIsDeleteModalOpen(false)
-    setTaskToDelete(null)
-  }
+    setTasks((prevTasks) => prevTasks.filter((task) => task.id !== id));
+    setIsDeleteModalOpen(false);
+    setTaskToDelete(null);
+  };
 
   const toggleTaskCompletion = (id: string) => {
     setTasks((prevTasks) =>
@@ -76,66 +82,70 @@ export default function Home() {
           ? {
               ...task,
               completed: !task.completed,
-              completedAt: !task.completed ? new Date().toISOString() : undefined,
+              completedAt: !task.completed
+                ? new Date().toISOString()
+                : undefined,
             }
-          : task,
-      ),
-    )
-  }
+          : task
+      )
+    );
+  };
 
   const handleEditTask = (task: Task) => {
-    setEditingTask(task)
-  }
+    setEditingTask(task);
+  };
 
   const handleDeleteTask = (id: string) => {
-    setTaskToDelete(id)
-    setIsDeleteModalOpen(true)
-  }
+    setTaskToDelete(id);
+    setIsDeleteModalOpen(true);
+  };
 
   const handleUpdateUserName = (newName: string) => {
-    setUserName(newName)
-    setIsUserNameModalOpen(false)
-  }
+    setUserName(newName);
+    setIsUserNameModalOpen(false);
+  };
 
   const clearFilter = () => {
-    setFilterType("all")
-    setIsFilterDropdownOpen(false)
-  }
+    setFilterType("all");
+    setIsFilterDropdownOpen(false);
+  };
 
   const clearSearch = () => {
-    setSearchQuery("")
-    setIsSearchExpanded(false)
-  }
+    setSearchQuery("");
+    setIsSearchExpanded(false);
+  };
 
   // Filter and search tasks
   const filteredTasks = tasks.filter((task) => {
     // Apply search filter
-    const matchesSearch = task.title.toLowerCase().includes(searchQuery.toLowerCase())
+    const matchesSearch = task.title
+      .toLowerCase()
+      .includes(searchQuery.toLowerCase());
 
     // Apply completion filter
-    let matchesFilter = true
+    let matchesFilter = true;
     if (filterType === "completed") {
-      matchesFilter = task.completed
+      matchesFilter = task.completed;
     } else if (filterType === "not-completed") {
-      matchesFilter = !task.completed
+      matchesFilter = !task.completed;
     } else if (filterType === "due") {
-      matchesFilter = isOverdue(task.deadline) && !task.completed
+      matchesFilter = isOverdue(task.deadline) && !task.completed;
     }
 
-    return matchesSearch && matchesFilter
-  })
+    return matchesSearch && matchesFilter;
+  });
 
   // Sort tasks: incomplete first (by deadline), then completed
   const sortedTasks = [...filteredTasks].sort((a, b) => {
     // First, separate completed and incomplete tasks
-    if (a.completed && !b.completed) return 1
-    if (!a.completed && b.completed) return -1
+    if (a.completed && !b.completed) return 1;
+    if (!a.completed && b.completed) return -1;
 
     // Then sort by deadline
-    return new Date(a.deadline).getTime() - new Date(b.deadline).getTime()
-  })
+    return new Date(a.deadline).getTime() - new Date(b.deadline).getTime();
+  });
 
-  const isReturningUser = tasks.length > 0 || userName
+  const isReturningUser = tasks.length > 0 || userName;
 
   return (
     <ThemeProvider>
@@ -154,8 +164,12 @@ export default function Home() {
           {/* Tasks Section */}
           <div className="bg-white dark:bg-gray-900 rounded-lg shadow-sm border border-gray-200 dark:border-[#2D2D2D]">
             <div className="px-5 py-2 flex justify-between text-gray-400 items-center bg-[#F5F5F5] dark:bg-[#1C1C1C] dark:text-[#989797]">
-              <h2 className="
-                ">Tasks</h2>
+              <h2
+                className="
+                "
+              >
+                {t('title')}
+              </h2>
               <div className="flex items-center space-x-4">
                 {/* Search */}
                 {isSearchExpanded ? (
@@ -164,14 +178,14 @@ export default function Home() {
                       type="text"
                       value={searchQuery}
                       onChange={(e) => setSearchQuery(e.target.value)}
-                      placeholder="Search tasks..."
+                      placeholder={t('searchPlaceholder')}
                       className="w-62 h-6 px-2 py-1 text-sm border border-gray-300 dark:border-[#2D2D2D] rounded-md bg-white dark:bg-[#141415] text-gray-900 dark:text-[#DEE2E2] focus:outline-none focus:ring-1 dark:focus:ring-gray-700 focus:ring-gray-200"
                       autoFocus
                     />
                     <button
                       onClick={clearSearch}
                       className="text-gray-400 hover:text-gray-600 dark:text-[#989797] dark:hover:text-gray-300"
-                      aria-label="Clear search"
+                      aria-label={t('clearSearchAriaLabel')}
                     >
                       <X size={16} />
                     </button>
@@ -180,7 +194,7 @@ export default function Home() {
                   <button
                     onClick={() => setIsSearchExpanded(true)}
                     className="text-gray-400 hover:text-gray-600 dark:text-[#989797] dark:hover:text-gray-300"
-                    aria-label="Search tasks"
+                    aria-label={t('searchAriaLabel')}
                   >
                     <Search size={17} className="relative bottom-[1px]" />
                   </button>
@@ -189,11 +203,15 @@ export default function Home() {
                 {/* Filter */}
                 <div className="relative">
                   <button
-                    onClick={() => setIsFilterDropdownOpen(!isFilterDropdownOpen)}
+                    onClick={() =>
+                      setIsFilterDropdownOpen(!isFilterDropdownOpen)
+                    }
                     className={`text-gray-400 hover:text-gray-600 dark:text-[#989797] dark:hover:text-gray-300 relative ${
-                      filterType !== "all" ? "text-green-500 dark:text-green-500" : ""
+                      filterType !== "all"
+                        ? "text-green-500 dark:text-green-500"
+                        : ""
                     }`}
-                    aria-label="Filter tasks"
+                    aria-label={t('filterAriaLabel')}
                   >
                     <Filter size={16} className="relative top-[2px]" />
                     {filterType !== "all" && (
@@ -205,37 +223,37 @@ export default function Home() {
                     <div className="absolute right-0 top-8 z-50 bg-white dark:bg-[#141415] border border-gray-200 dark:border-[#2D2D2D] rounded-lg shadow-lg py-1 min-w-[160px]">
                       <button
                         onClick={() => {
-                          setFilterType("completed")
-                          setIsFilterDropdownOpen(false)
+                          setFilterType("completed");
+                          setIsFilterDropdownOpen(false);
                         }}
                         className="w-full px-3 py-2 text-left text-sm text-gray-700 dark:text-[#DEE2E2] hover:bg-gray-100 dark:hover:bg-[#1C1C1C]"
                       >
-                        Show completed
+                        {t('showCompleted')}
                       </button>
                       <button
                         onClick={() => {
-                          setFilterType("not-completed")
-                          setIsFilterDropdownOpen(false)
+                          setFilterType("not-completed");
+                          setIsFilterDropdownOpen(false);
                         }}
                         className="w-full px-3 py-2 text-left text-sm text-gray-700 dark:text-[#DEE2E2] hover:bg-gray-100 dark:hover:bg-[#1C1C1C]"
                       >
-                        Show not completed
+                        {t('showNotCompleted')}
                       </button>
                       <button
                         onClick={() => {
-                          setFilterType("due")
-                          setIsFilterDropdownOpen(false)
+                          setFilterType("due");
+                          setIsFilterDropdownOpen(false);
                         }}
                         className="w-full px-3 py-2 text-left text-sm text-gray-700 dark:text-[#DEE2E2] hover:bg-gray-100 dark:hover:bg-[#1C1C1C]"
                       >
-                        Show due tasks
+                        {t('showDueTasks')}
                       </button>
                       {filterType !== "all" && (
                         <button
                           onClick={clearFilter}
                           className="w-full px-3 py-2 text-left text-sm text-gray-500 dark:text-[#DEE2E2] hover:bg-gray-100 dark:hover:bg-[#1C1C1C] border-t border-gray-200 dark:border-[#2D2D2D]"
                         >
-                          Clear filter
+                          {t('clearFilter')}
                         </button>
                       )}
                     </div>
@@ -246,7 +264,7 @@ export default function Home() {
                 <button
                   onClick={() => setIsModalOpen(true)}
                   className="text-gray-400 hover:text-gray-600 dark:text-[#989797] dark:hover:text-gray-300"
-                  aria-label="Add task"
+                  aria-label={t('addTaskAriaLabel')}
                 >
                   <Plus size={18} />
                 </button>
@@ -257,12 +275,12 @@ export default function Home() {
               {sortedTasks.length === 0 ? (
                 <div className="px-5 py-4 text-center text-sm text-gray-400 dark:bg-[#141415] dark:text-[#989797] border-t border-gray-100 dark:border-[#2D2D2D]">
                   {searchQuery || filterType !== "all"
-                    ? "No tasks match your criteria."
-                    : "No tasks yet. Click + to add one."}
+                    ? t('noTasksFound')
+                    : t('noTasksYet')}
                 </div>
               ) : (
                 sortedTasks.map((task, index) => {
-                  const overdue = isOverdue(task.deadline) && !task.completed
+                  const overdue = isOverdue(task.deadline) && !task.completed;
                   return (
                     <div
                       key={task.id}
@@ -283,7 +301,13 @@ export default function Home() {
                           {task.completed && (
                             <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
                               <div className="w-4 h-4 rounded-full bg-blue-500 dark:bg-green-600 flex items-center justify-center">
-                                <svg width="10" height="10" viewBox="0 0 24 24" fill="none" className="text-white">
+                                <svg
+                                  width="10"
+                                  height="10"
+                                  viewBox="0 0 24 24"
+                                  fill="none"
+                                  className="text-white"
+                                >
                                   <path
                                     d="M20 6L9 17L4 12"
                                     stroke="currentColor"
@@ -301,8 +325,8 @@ export default function Home() {
                             task.completed
                               ? "line-through text-gray-400 dark:text-[#989797]"
                               : overdue
-                                ? "text-red-500 dark:text-red-400"
-                                : "text-gray-700 dark:text-[#DEE2E2]"
+                              ? "text-red-500 dark:text-red-400"
+                              : "text-gray-700 dark:text-[#DEE2E2]"
                           }`}
                         >
                           {task.title}
@@ -311,7 +335,9 @@ export default function Home() {
                       <div className="flex items-center space-x-3">
                         <div
                           className={`text-sm ${
-                            overdue ? "text-red-500 dark:text-red-400" : "text-gray-400 dark:text-[#989797]"
+                            overdue
+                              ? "text-red-500 dark:text-red-400"
+                              : "text-gray-400 dark:text-[#989797]"
                           }`}
                         >
                           {formatRelativeTime(task.deadline)}
@@ -321,18 +347,28 @@ export default function Home() {
                             <button
                               onClick={() => handleEditTask(task)}
                               className="p-1 text-gray-400 hover:text-blue-500 dark:text-[#989797] dark:hover:text-blue-400"
-                              aria-label="Edit task"
+                              aria-label={t('editTaskAriaLabel')}
                             >
-                              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                              <svg
+                                width="14"
+                                height="14"
+                                viewBox="0 0 24 24"
+                                fill="currentColor"
+                              >
                                 <path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z" />
                               </svg>
                             </button>
                             <button
                               onClick={() => handleDeleteTask(task.id)}
                               className="p-1 text-gray-400 hover:text-red-500 dark:text-[#989797] dark:hover:text-red-400"
-                              aria-label="Delete task"
+                              aria-label={t('deleteTaskAriaLabel')}
                             >
-                              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                              <svg
+                                width="14"
+                                height="14"
+                                viewBox="0 0 24 24"
+                                fill="currentColor"
+                              >
                                 <path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z" />
                               </svg>
                             </button>
@@ -340,7 +376,7 @@ export default function Home() {
                         )}
                       </div>
                     </div>
-                  )
+                  );
                 })
               )}
             </div>
@@ -354,8 +390,8 @@ export default function Home() {
         {(isModalOpen || editingTask) && (
           <TaskModal
             onClose={() => {
-              setIsModalOpen(false)
-              setEditingTask(null)
+              setIsModalOpen(false);
+              setEditingTask(null);
             }}
             onAdd={addTask}
             onUpdate={updateTask}
@@ -366,8 +402,8 @@ export default function Home() {
         {isDeleteModalOpen && taskToDelete && (
           <DeleteConfirmModal
             onClose={() => {
-              setIsDeleteModalOpen(false)
-              setTaskToDelete(null)
+              setIsDeleteModalOpen(false);
+              setTaskToDelete(null);
             }}
             onConfirm={() => deleteTask(taskToDelete)}
             taskTitle={tasks.find((t) => t.id === taskToDelete)?.title || ""}
@@ -383,8 +419,13 @@ export default function Home() {
         )}
 
         {/* Click outside to close filter dropdown */}
-        {isFilterDropdownOpen && <div className="fixed inset-0 z-40" onClick={() => setIsFilterDropdownOpen(false)} />}
+        {isFilterDropdownOpen && (
+          <div
+            className="fixed inset-0 z-40"
+            onClick={() => setIsFilterDropdownOpen(false)}
+          />
+        )}
       </main>
     </ThemeProvider>
-  )
+  );
 }
