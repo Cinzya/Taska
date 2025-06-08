@@ -2,6 +2,7 @@
 
 import { useState } from "react"
 import { X, Plus, Trash2, ChevronUp, ChevronDown } from "lucide-react"
+import { useTranslations } from "next-intl"
 
 interface TimezoneInfo {
   id: string
@@ -35,6 +36,7 @@ const COMMON_TIMEZONES = [
 ]
 
 export default function TimezoneModal({ onClose, onUpdate, currentTimezones }: TimezoneModalProps) {
+  const t = useTranslations('TimezoneModal')
   const [timezones, setTimezones] = useState<TimezoneInfo[]>(currentTimezones)
   const [selectedTimezone, setSelectedTimezone] = useState("")
 
@@ -84,7 +86,7 @@ export default function TimezoneModal({ onClose, onUpdate, currentTimezones }: T
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
       <div className="bg-white dark:bg-[#141415] rounded-xl shadow-lg w-full max-w-md p-6 max-h-[80vh] overflow-y-auto">
         <div className="flex justify-between items-center mb-4">
-          <h3 className="text-lg font-medium text-gray-900 dark:text-[#DEE2E2]">Manage Timezones</h3>
+          <h3 className="text-lg font-medium text-gray-900 dark:text-[#DEE2E2]">{t('title')}</h3>
           <button onClick={onClose} className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300">
             <X size={20} />
           </button>
@@ -94,7 +96,7 @@ export default function TimezoneModal({ onClose, onUpdate, currentTimezones }: T
           {/* Current Timezones */}
           <div>
             <h4 className="text-sm font-medium text-gray-700 dark:text-[#DEE2E2] mb-2">
-              Current Timezones ({timezones.length}/10)
+              {t('currentTimezonesLabel')} ({timezones.length}/10)
             </h4>
             <div className="space-y-2">
               {timezones.map((tz, index) => (
@@ -113,7 +115,7 @@ export default function TimezoneModal({ onClose, onUpdate, currentTimezones }: T
                               ? "text-gray-300 dark:text-gray-600 cursor-not-allowed"
                               : "text-gray-400 hover:text-gray-600 dark:text-[#989797] dark:hover:text-gray-300"
                           }`}
-                          aria-label="Move up"
+                          aria-label={t('moveUpAriaLabel')}
                         >
                           <ChevronUp size={12} />
                         </button>
@@ -125,7 +127,7 @@ export default function TimezoneModal({ onClose, onUpdate, currentTimezones }: T
                               ? "text-gray-300 dark:text-gray-600 cursor-not-allowed"
                               : "text-gray-400 hover:text-gray-600 dark:text-[#989797] dark:hover:text-gray-300"
                           }`}
-                          aria-label="Move down"
+                          aria-label={t('moveDownAriaLabel')}
                         >
                           <ChevronDown size={12} />
                         </button>
@@ -140,7 +142,7 @@ export default function TimezoneModal({ onClose, onUpdate, currentTimezones }: T
                     <button
                       onClick={() => removeTimezone(tz.id)}
                       className="text-red-500 hover:text-red-700 dark:text-red-400 dark:hover:text-red-300"
-                      aria-label="Remove timezone"
+                      aria-label={t('removeTimezoneAriaLabel')}
                     >
                       <Trash2 size={16} />
                     </button>
@@ -153,7 +155,7 @@ export default function TimezoneModal({ onClose, onUpdate, currentTimezones }: T
           {/* Add New Timezone */}
           {timezones.length < 10 && availableTimezones.length > 0 && (
             <div>
-              <h4 className="text-sm font-medium text-gray-700 dark:text-[#DEE2E2] mb-2">Add Timezone</h4>
+              <h4 className="text-sm font-medium text-gray-700 dark:text-[#DEE2E2] mb-2">{t('addTimezoneLabel')}</h4>
               <div className="flex space-x-2">
                 <div className="relative flex-1">
                   <select
@@ -161,7 +163,7 @@ export default function TimezoneModal({ onClose, onUpdate, currentTimezones }: T
                     onChange={(e) => setSelectedTimezone(e.target.value)}
                     className="appearance-none w-full px-3 py-2 border border-gray-300 dark:border-[#2D2D2D] rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-400 dark:focus:ring-[#2D2D2D] bg-white dark:bg-[#141415] text-gray-900 dark:text-[#DEE2E2]"
                   >
-                    <option value="">Select a timezone...</option>
+                    <option value="">{t('selectTimezonePlaceholder')}</option>
                     {availableTimezones.map((tz) => (
                       <option key={tz.value} value={tz.value}>
                         {tz.label}
@@ -177,7 +179,7 @@ export default function TimezoneModal({ onClose, onUpdate, currentTimezones }: T
                   onClick={addTimezone}
                   disabled={!selectedTimezone}
                   className="px-3 py-2 bg-gray-900 dark:bg-[#FEFEFE] text-white dark:text-[#000000] rounded-lg hover:bg-gray-800 dark:hover:bg-[#E9E9E9] disabled:opacity-50 disabled:cursor-not-allowed"
-                  aria-label="Add timezone"
+                  aria-label={t('addTimezoneAriaLabel')}
                 >
                   <Plus size={16} />
                 </button>
@@ -191,13 +193,13 @@ export default function TimezoneModal({ onClose, onUpdate, currentTimezones }: T
             onClick={onClose}
             className="px-4 py-2 border border-gray-300 dark:border-[#2D2D2D] rounded-xl text-gray-700 dark:text-[#DEE2E2] hover:bg-gray-100 dark:hover:bg-[#1C1C1C]"
           >
-            Cancel
+            {t('cancelButton')}
           </button>
           <button
             onClick={handleSubmit}
             className="px-4 py-2 border border-gray-300 dark:border-[#2D2D2D] rounded-xl focus:outline-none focus:ring-2 focus:ring-gray-400 dark:focus:ring-[#2D2D2D] bg-gray-900 dark:bg-[#FEFEFE] text-white dark:text-[#000000] dark:hover:bg-[#E9E9E9] hover:bg-gray-800"
           >
-            Save Changes
+            {t('saveChangesButton')}
           </button>
         </div>
       </div>

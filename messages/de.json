@@ -48,5 +48,17 @@
     "notCompleted": "Nicht erledigt",
     "completed": "Erledigt",
     "totalTasks": "Alle Aufgaben"
+  },
+  "TimezoneModal": {
+    "title": "Zeitzonen verwalten",
+    "currentTimezonesLabel": "Aktuelle Zeitzonen",
+    "addTimezoneLabel": "Zeitzone hinzufügen",
+    "selectTimezonePlaceholder": "Zeitzone auswählen...",
+    "moveUpAriaLabel": "Nach oben verschieben",
+    "moveDownAriaLabel": "Nach unten verschieben",
+    "removeTimezoneAriaLabel": "Zeitzone entfernen",
+    "addTimezoneAriaLabel": "Zeitzone hinzufügen",
+    "cancelButton": "Abbrechen",
+    "saveChangesButton": "Änderungen speichern"
   }
 }
